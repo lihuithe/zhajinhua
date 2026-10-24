@@ -1,0 +1,27 @@
+[Unit]
+Description=Zhajinhua game server (Node.js)
+After=network.target
+
+[Service]
+Type=simple
+WorkingDirectory=/opt/zhajinhua/app/server
+ExecStart=/usr/local/bin/node --max-old-space-size=384 src/index.js
+Environment=NODE_ENV=production
+Environment=PORT=80
+Environment=HOST=0.0.0.0
+Environment=DATA_DIR=/opt/zhajinhua/data
+Environment=STATIC_DIR=/opt/zhajinhua/app/client/dist
+# 管理后台账号（默认 admin / admin，对外开放前请修改）
+Environment=ADMIN_USERNAME=admin
+Environment=ADMIN_PASSWORD=admin
+Restart=always
+RestartSec=1
+# 停止时先发 SIGTERM：进程写房间快照、通知客户端（1012）后退出
+KillSignal=SIGTERM
+TimeoutStopSec=15
+LimitNOFILE=65535
+StandardOutput=journal
+StandardError=journal
+
+[Install]
+WantedBy=multi-user.target

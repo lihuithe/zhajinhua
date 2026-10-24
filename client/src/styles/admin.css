@@ -1,0 +1,243 @@
+/* 管理后台通用样式（只作用于 .adm 下） */
+.adm {
+  --a-bg: #0b1512;
+  --a-panel: #121f1a;
+  --a-panel2: #18291f;
+  --a-line: rgba(255, 255, 255, 0.08);
+  --a-text: #e8e4d6;
+  --a-muted: #8fa39a;
+  --a-gold: #e6b84f;
+  min-height: 100vh;
+  min-height: 100dvh;
+  color: var(--a-text);
+  background: var(--a-bg);
+  -webkit-user-select: text;
+  user-select: text;
+  font-size: 14px;
+}
+.adm .card, .adm-in .card {
+  background: var(--a-panel);
+  border: 1px solid var(--a-line);
+  border-radius: 14px;
+  padding: 16px;
+}
+.adm .card + .card, .adm-in .card + .card {
+  margin-top: 14px;
+}
+.adm .card-title, .adm-in .card-title {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0 0 12px;
+  font-size: 15px;
+  font-weight: 700;
+  color: var(--a-gold);
+}
+.adm .toolbar, .adm-in .toolbar {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+.adm .toolbar .input, .adm-in .toolbar .input {
+  width: auto;
+  flex: 1 1 200px;
+  max-width: 320px;
+  height: 38px;
+  font-size: 14px;
+}
+.adm .btn, .adm-in .btn {
+  min-height: 36px;
+  padding: 0 14px;
+  font-size: 14px;
+  letter-spacing: 0;
+  border-radius: 10px;
+}
+.adm .btn-xs, .adm-in .btn-xs {
+  min-height: 28px;
+  min-width: 0;
+  padding: 0 10px;
+  font-size: 12px;
+  border-radius: 8px;
+}
+.adm .seg, .adm-in .seg {
+  display: inline-flex;
+  padding: 3px;
+  background: rgba(0, 0, 0, 0.3);
+  border: 1px solid var(--a-line);
+  border-radius: 10px;
+}
+.adm .seg button, .adm-in .seg button {
+  height: 30px;
+  padding: 0 14px;
+  font-size: 13px;
+  color: var(--a-muted);
+  border-radius: 8px;
+}
+.adm .seg button.on, .adm-in .seg button.on {
+  color: #3a2603;
+  font-weight: 700;
+  background: linear-gradient(180deg, #ffe9a8, #e6b84f);
+}
+/* 表格 */
+.adm .tbl-wrap, .adm-in .tbl-wrap {
+  overflow-x: auto;
+  -webkit-overflow-scrolling: touch;
+  border: 1px solid var(--a-line);
+  border-radius: 12px;
+}
+.adm table.tbl, .adm-in table.tbl {
+  width: 100%;
+  border-collapse: collapse;
+  white-space: nowrap;
+}
+.adm .tbl th, .adm .tbl td, .adm-in .tbl th, .adm-in .tbl td {
+  padding: 9px 12px;
+  text-align: left;
+  border-bottom: 1px solid var(--a-line);
+}
+.adm .tbl th, .adm-in .tbl th {
+  position: sticky;
+  top: 0;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--a-muted);
+  background: #0f1b16;
+}
+.adm .tbl tbody tr:hover, .adm-in .tbl tbody tr:hover {
+  background: rgba(230, 184, 79, 0.05);
+}
+.adm .tbl tr:last-child td, .adm-in .tbl tr:last-child td {
+  border-bottom: 0;
+}
+.adm .tbl td.num, .adm .tbl th.num, .adm-in .tbl td.num, .adm-in .tbl th.num {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+.adm .tbl .empty, .adm-in .tbl .empty {
+  padding: 30px;
+  text-align: center;
+  color: var(--a-muted);
+}
+.adm .link, .adm-in .link {
+  color: #8cc6ff;
+  cursor: pointer;
+}
+.adm .link:hover, .adm-in .link:hover {
+  text-decoration: underline;
+}
+.adm .mono, .adm-in .mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+.adm .muted, .adm-in .muted {
+  color: var(--a-muted);
+}
+.adm .pos, .adm-in .pos {
+  color: #5fd68d;
+}
+.adm .neg, .adm-in .neg {
+  color: #ff7b66;
+}
+/* 标签 */
+.adm .tag, .adm-in .tag {
+  display: inline-block;
+  padding: 0 7px;
+  font-size: 12px;
+  line-height: 20px;
+  border-radius: 6px;
+  color: #d5ddd8;
+  background: rgba(255, 255, 255, 0.1);
+  white-space: nowrap;
+}
+.adm .tag.green, .adm-in .tag.green {
+  color: #c9f5d9;
+  background: rgba(47, 158, 91, 0.35);
+}
+.adm .tag.blue, .adm-in .tag.blue {
+  color: #cfe5ff;
+  background: rgba(47, 127, 214, 0.35);
+}
+.adm .tag.gold, .adm-in .tag.gold {
+  color: #3a2603;
+  background: #e6b84f;
+}
+.adm .tag.red, .adm-in .tag.red {
+  color: #ffd2c9;
+  background: rgba(217, 65, 46, 0.4);
+}
+.adm .tag.orange, .adm-in .tag.orange {
+  color: #ffe2c0;
+  background: rgba(224, 138, 30, 0.4);
+}
+.adm .tag.gray, .adm-in .tag.gray {
+  color: #aab6b0;
+  background: rgba(255, 255, 255, 0.06);
+}
+/* 键值列表 */
+.adm .kv, .adm-in .kv {
+  display: grid;
+  grid-template-columns: max-content 1fr;
+  gap: 8px 16px;
+  font-size: 14px;
+}
+.adm .kv dt, .adm-in .kv dt {
+  color: var(--a-muted);
+}
+.adm .kv dd, .adm-in .kv dd {
+  margin: 0;
+  word-break: break-all;
+}
+.adm .grid2, .adm-in .grid2 {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+  gap: 14px;
+}
+.adm .field, .adm-in .field {
+  margin-bottom: 14px;
+}
+.adm .field > label, .adm-in .field > label {
+  display: block;
+  margin-bottom: 6px;
+  font-size: 13px;
+  color: var(--a-muted);
+}
+.adm textarea.input, .adm-in textarea.input {
+  height: auto;
+  min-height: 96px;
+  padding: 10px 12px;
+  line-height: 1.6;
+  resize: vertical;
+}
+.adm select.input, .adm-in select.input {
+  -webkit-appearance: auto;
+  appearance: auto;
+}
+.adm .check, .adm-in .check {
+  display: inline-flex;
+  align-items: center;
+  margin-right: 18px;
+  font-size: 14px;
+  cursor: pointer;
+}
+.adm .check input, .adm-in .check input {
+  width: 18px;
+  height: 18px;
+  margin: 0 6px 0 0;
+  accent-color: #e6b84f;
+}
+/* 弹窗（teleport 到 body）里的后台内容 */
+.adm-in {
+  --a-panel: #121f1a;
+  --a-line: rgba(255, 255, 255, 0.08);
+  --a-text: #e8e4d6;
+  --a-muted: #8fa39a;
+  --a-gold: #e6b84f;
+  color: var(--a-text);
+  font-size: 14px;
+  -webkit-user-select: text;
+  user-select: text;
+}
+.adm .grid2 > .card + .card, .adm-in .grid2 > .card + .card {
+  margin-top: 0;
+}

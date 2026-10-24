@@ -1,0 +1,13 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 64 64">
+  <defs>
+    <radialGradient id="g" cx="35%" cy="30%" r="75%">
+      <stop offset="0" stop-color="#fff2c0"/>
+      <stop offset=".55" stop-color="#e8b94e"/>
+      <stop offset="1" stop-color="#9a6a14"/>
+    </radialGradient>
+  </defs>
+  <rect x="4" y="4" width="56" height="56" rx="14" fill="#7d1426"/>
+  <rect x="8" y="8" width="48" height="48" rx="11" fill="none" stroke="#f0c86e" stroke-opacity=".6" stroke-width="2"/>
+  <circle cx="32" cy="32" r="18" fill="url(#g)"/>
+  <text x="32" y="40" text-anchor="middle" font-size="22" font-weight="900" fill="#6a0f1f" font-family="KaiTi,STKaiti,serif">金</text>
+</svg>

@@ -1,0 +1,326 @@
+/* 全局基础样式：深色背景 + 金色点缀 */
+:root {
+  --bg: #07140f;
+  --bg2: #0e2a1e;
+  --panel: rgba(255, 255, 255, 0.06);
+  --panel2: rgba(255, 255, 255, 0.1);
+  --line: rgba(230, 184, 79, 0.28);
+  --gold: #e6b84f;
+  --gold-d: #b88a2a;
+  --gold-l: #ffe39a;
+  --text: #f3ecd8;
+  --muted: #9fb3a6;
+  --danger: #e0563f;
+  --ok: #52c17a;
+  --felt1: #1f7048;
+  --felt2: #0f4a2e;
+  --red-card: #d3262f;
+  --nb: 0px; /* 顶部系统通知横幅的高度（NoticeBar 设置） */
+  --sat-raw: 0px;
+  --sat: calc(var(--sat-raw) + var(--nb));
+  --sar: 0px;
+  --sab: 0px;
+  --sal: 0px;
+}
+@supports (padding: constant(safe-area-inset-top)) {
+  :root {
+    --sat-raw: constant(safe-area-inset-top);
+    --sar: constant(safe-area-inset-right);
+    --sab: constant(safe-area-inset-bottom);
+    --sal: constant(safe-area-inset-left);
+  }
+}
+@supports (padding: env(safe-area-inset-top)) {
+  :root {
+    --sat-raw: env(safe-area-inset-top);
+    --sar: env(safe-area-inset-right);
+    --sab: env(safe-area-inset-bottom);
+    --sal: env(safe-area-inset-left);
+  }
+}
+
+* {
+  box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+/* 深色界面：原生控件（下拉框、滚动条等）也用深色 */
+:root {
+  color-scheme: dark;
+}
+
+/* 滚动条：细、透明轨道、半透明金色滑块（Chrome / Edge / Safari） */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-track,
+::-webkit-scrollbar-corner {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background-color: rgba(230, 184, 79, 0.28);
+  background-clip: padding-box;
+  border: 2px solid transparent;
+  border-radius: 8px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background-color: rgba(230, 184, 79, 0.5);
+}
+/* 面板里的滚动区（聊天、观战者、操作记录）：平时不显示，鼠标移上去才出现细滑块 */
+.soft-scroll::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+.soft-scroll::-webkit-scrollbar-thumb {
+  background-color: transparent;
+}
+.soft-scroll:hover::-webkit-scrollbar-thumb {
+  background-color: rgba(230, 184, 79, 0.35);
+}
+/* Firefox */
+@supports not selector(::-webkit-scrollbar) {
+  * {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(230, 184, 79, 0.3) transparent;
+  }
+  .soft-scroll {
+    scrollbar-color: transparent transparent;
+  }
+  .soft-scroll:hover {
+    scrollbar-color: rgba(230, 184, 79, 0.35) transparent;
+  }
+}
+
+html,
+body {
+  margin: 0;
+  padding: 0;
+  width: 100%;
+  min-height: 100%;
+  overflow-x: hidden;
+  overflow-x: clip; /* 不形成滚动容器，页面里的 position: sticky 才能生效 */
+  background: var(--bg);
+  color: var(--text);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei',
+    'Noto Sans CJK SC', sans-serif;
+  font-size: 15px;
+  line-height: 1.4;
+  -webkit-text-size-adjust: 100%;
+  text-size-adjust: 100%;
+  touch-action: manipulation; /* 禁用双击缩放 */
+  overscroll-behavior-x: none;
+  /* 禁用长按选中 */
+  -webkit-user-select: none;
+  user-select: none;
+  -webkit-touch-callout: none;
+}
+
+body {
+  background: radial-gradient(ellipse at 50% 0%, #123824 0%, var(--bg) 60%) fixed;
+}
+
+#app {
+  min-height: 100vh;
+  min-height: 100dvh;
+  width: 100%;
+  overflow-x: hidden;
+  overflow-x: clip;
+}
+
+/* 允许选中的区域（邀请链接等） */
+input,
+textarea,
+.selectable,
+.selectable * {
+  -webkit-user-select: text;
+  user-select: text;
+  -webkit-touch-callout: default;
+}
+
+input,
+textarea,
+select,
+button {
+  font-family: inherit;
+  color: inherit;
+}
+
+button {
+  cursor: pointer;
+  border: 0;
+  background: none;
+  padding: 0;
+  margin: 0;
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+a {
+  color: var(--gold);
+}
+
+.input {
+  width: 100%;
+  height: 44px;
+  padding: 0 12px;
+  font-size: 16px; /* 16px 避免 iOS 聚焦时自动放大 */
+  color: var(--text);
+  background: rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(255, 255, 255, 0.18);
+  border-radius: 10px;
+  outline: none;
+  -webkit-appearance: none;
+  appearance: none;
+}
+.input:focus {
+  border-color: var(--gold);
+  box-shadow: 0 0 0 2px rgba(230, 184, 79, 0.25);
+}
+.input[readonly] {
+  background: rgba(0, 0, 0, 0.5);
+}
+.input.bad {
+  border-color: var(--danger);
+}
+
+/* 按钮：触控目标 >= 40px */
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 44px;
+  min-width: 44px;
+  padding: 0 18px;
+  font-size: 16px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  color: var(--text);
+  background: var(--panel2);
+  border: 1px solid rgba(255, 255, 255, 0.16);
+  border-radius: 12px;
+  text-align: center;
+  white-space: nowrap;
+  transition: transform 0.08s, opacity 0.2s;
+}
+.btn:active:not(:disabled) {
+  transform: scale(0.96);
+}
+.btn:disabled,
+.btn.disabled {
+  opacity: 0.38;
+  cursor: not-allowed;
+  filter: grayscale(0.5);
+}
+.btn-gold {
+  color: #3a2603;
+  background: linear-gradient(180deg, var(--gold-l) 0%, var(--gold) 55%, var(--gold-d) 100%);
+  border-color: #f3d17a;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.35);
+}
+.btn-danger {
+  color: #fff;
+  background: linear-gradient(180deg, #f0745e 0%, var(--danger) 60%, #b23b28 100%);
+  border-color: #f28a77;
+}
+.btn-ghost {
+  background: transparent;
+  border-color: var(--line);
+  color: var(--gold);
+}
+/* 牌局操作按钮配色：跟注绿 / 看牌蓝 / 比牌红 / 弃牌灰 / 加注金 */
+.btn-green,
+.btn-blue,
+.btn-red,
+.btn-gray,
+.btn-orange {
+  color: #fff;
+  text-shadow: 0 1px 1px rgba(0, 0, 0, 0.35);
+  box-shadow: 0 3px 0 rgba(0, 0, 0, 0.35), inset 0 1px 0 rgba(255, 255, 255, 0.35);
+}
+.btn-green {
+  background: linear-gradient(180deg, #5fd68d 0%, #2f9e5b 55%, #1f7a43 100%);
+  border-color: #7fe3a6;
+}
+.btn-blue {
+  background: linear-gradient(180deg, #6bb6ff 0%, #2f7fd6 55%, #1f5fa8 100%);
+  border-color: #8cc6ff;
+}
+.btn-red {
+  background: linear-gradient(180deg, #ff7f6b 0%, #d9412e 55%, #a82c1d 100%);
+  border-color: #ff9d8c;
+}
+.btn-gray {
+  background: linear-gradient(180deg, #5d6a66 0%, #3f4a47 55%, #2d3533 100%);
+  border-color: #7c8a85;
+}
+.btn-orange {
+  color: #3a2603;
+  text-shadow: 0 1px 0 rgba(255, 255, 255, 0.4);
+  background: linear-gradient(180deg, #ffe29a 0%, #f2b33d 55%, #c8861a 100%);
+  border-color: #ffe6a8;
+}
+.btn-sm {
+  min-height: 40px;
+  padding: 0 12px;
+  font-size: 14px;
+  border-radius: 10px;
+}
+.btn-block {
+  display: flex;
+  width: 100%;
+}
+.btn-lg {
+  min-height: 56px;
+  font-size: 20px;
+  border-radius: 16px;
+}
+
+.card-box {
+  background: var(--panel);
+  border: 1px solid var(--line);
+  border-radius: 16px;
+  padding: 16px;
+}
+
+.muted {
+  color: var(--muted);
+}
+.gold {
+  color: var(--gold);
+}
+.pos {
+  color: var(--ok);
+}
+.neg {
+  color: #ff7b66;
+}
+.mono {
+  font-family: ui-monospace, SFMono-Regular, Menlo, Consolas, monospace;
+}
+
+.page-wrap {
+  width: 100%;
+  max-width: 520px;
+  margin: 0 auto;
+  padding: calc(16px + var(--sat)) calc(16px + var(--sar)) calc(24px + var(--sab)) calc(16px + var(--sal));
+  min-height: 100vh;
+  min-height: 100dvh;
+}
+
+.fade-enter-active,
+.fade-leave-active {
+  transition: opacity 0.2s;
+}
+.fade-enter-from,
+.fade-leave-to {
+  opacity: 0;
+}
+
+@media (prefers-reduced-motion: reduce) {
+  * {
+    animation-duration: 0.01ms !important;
+    transition-duration: 0.01ms !important;
+  }
+}

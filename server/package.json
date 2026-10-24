@@ -1,0 +1,18 @@
+{
+  "name": "zjh-server",
+  "version": "1.0.0",
+  "private": true,
+  "type": "module",
+  "description": "炸金花多人网页游戏后端",
+  "engines": {
+    "node": ">=24"
+  },
+  "scripts": {
+    "start": "node src/index.js",
+    "dev": "node --watch src/index.js",
+    "test": "node --test"
+  },
+  "dependencies": {
+    "ws": "^8.22.0"
+  }
+}
